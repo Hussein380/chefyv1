@@ -1,0 +1,454 @@
+.circle,
+.subtractIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 302px;
+  height: 221px;
+}
+.circle {
+  top: 167px;
+  left: 98px;
+  border-radius: 50%;
+  background-color: #9a9898;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+.component {
+  align-self: stretch;
+  height: 267px;
+  position: relative;
+}
+.button,
+.buttonSecondary,
+.buttonTertiary {
+  align-self: stretch;
+  height: 15px;
+  position: relative;
+  background-color: #969696;
+  z-index: 1;
+}
+.actions,
+.content1 {
+  display: flex;
+  align-items: flex-start;
+}
+.actions {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 22px;
+}
+.content1 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 19px 0 20px;
+}
+.column,
+.row {
+  display: flex;
+  justify-content: flex-start;
+}
+.column {
+  flex: 1;
+  border-radius: 24px;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1px 40px 0;
+  gap: 18px;
+}
+.row {
+  position: absolute;
+  top: 0.5px;
+  left: 0;
+  width: 303px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.asideIcon,
+.content {
+  width: 365.3px;
+  overflow: hidden;
+}
+.asideIcon {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  height: 201px;
+  z-index: 2;
+}
+.content {
+  height: 415px;
+  position: relative;
+  flex-shrink: 0;
+  debug_commit: 448091;
+  max-width: 100%;
+}
+.circle1,
+.subtractIcon1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 302px;
+  height: 221px;
+}
+.circle1 {
+  top: 167px;
+  left: 98px;
+  border-radius: 50%;
+  background-color: #9a9898;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+.column1 {
+  align-self: stretch;
+  height: 267px;
+  position: relative;
+}
+.button1,
+.buttonSecondary1,
+.buttonTertiary1 {
+  align-self: stretch;
+  height: 15px;
+  position: relative;
+  background-color: #969696;
+  z-index: 1;
+}
+.actions1,
+.content3 {
+  display: flex;
+  align-items: flex-start;
+}
+.actions1 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 22px;
+}
+.content3 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 19px 0 20px;
+}
+.content2,
+.row1 {
+  display: flex;
+  justify-content: flex-start;
+}
+.row1 {
+  flex: 1;
+  border-radius: 24px;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1px 40px 0;
+  gap: 18px;
+}
+.content2 {
+  width: 303px;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  z-index: 1;
+}
+.rowIcon {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  bottom: 0;
+  left: -328px;
+  max-height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.actionsColumnIcon {
+  height: 201px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+.content4,
+.contentIcon {
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  flex-shrink: 0;
+}
+.contentIcon {
+  height: 100%;
+  width: 100%;
+  right: -9.8px;
+  overflow: hidden;
+  z-index: 3;
+}
+.content4 {
+  width: 363.6px;
+  left: 328px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.circle2,
+.subtractIcon2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 302px;
+  height: 221px;
+}
+.circle2 {
+  top: 167px;
+  left: 98px;
+  border-radius: 50%;
+  background-color: #9a9898;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+.column2 {
+  align-self: stretch;
+  height: 267px;
+  position: relative;
+}
+.button2,
+.buttonSecondary2,
+.buttonTertiary2 {
+  align-self: stretch;
+  height: 15px;
+  position: relative;
+  background-color: #969696;
+  z-index: 1;
+}
+.actions2,
+.content6 {
+  display: flex;
+  align-items: flex-start;
+}
+.actions2 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 22px;
+}
+.content6 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 19px 0 20px;
+}
+.content5,
+.row2 {
+  display: flex;
+  justify-content: flex-start;
+}
+.row2 {
+  flex: 1;
+  border-radius: 24px;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1px 40px 0;
+  gap: 18px;
+}
+.content5 {
+  width: 303px;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  z-index: 4;
+}
+.rowIcon1 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  bottom: -4px;
+  left: -6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 5;
+}
+.columnIcon {
+  height: 200px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  z-index: 6;
+}
+.content7,
+.rowIcon2 {
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  flex-shrink: 0;
+}
+.content7 {
+  width: 366.7px;
+  left: 667px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.rowIcon2 {
+  height: 100%;
+  width: 100%;
+  left: -7px;
+  overflow: hidden;
+  z-index: 7;
+}
+.columnIcon1 {
+  height: 203px;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  z-index: 8;
+}
+.content8 {
+  width: 364.9px;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 1000px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.subtractIcon3 {
+  border: 0;
+  background-color: transparent;
+  height: 221px;
+  width: 302px;
+  outline: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.circle3 {
+  position: absolute;
+  top: 167px;
+  left: 98px;
+  border-radius: 50%;
+  background-color: #9a9898;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+.column3 {
+  align-self: stretch;
+  height: 267px;
+  position: relative;
+}
+.button3,
+.buttonSecondary3,
+.buttonTertiary3 {
+  align-self: stretch;
+  height: 15px;
+  position: relative;
+  background-color: #969696;
+  z-index: 1;
+}
+.actions3,
+.content10 {
+  display: flex;
+  align-items: flex-start;
+}
+.actions3 {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 22px;
+}
+.content10 {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 19px 0 20px;
+}
+.content9,
+.frame,
+.main,
+.row3 {
+  display: flex;
+  justify-content: flex-start;
+}
+.row3 {
+  flex: 1;
+  border-radius: 24px;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1px 40px 0;
+  gap: 18px;
+}
+.content9,
+.frame,
+.main {
+  flex-direction: row;
+  align-items: flex-start;
+}
+.content9 {
+  width: 303px;
+  flex-shrink: 0;
+  z-index: 9;
+}
+.frame,
+.main {
+  max-width: 100%;
+}
+.main {
+  flex: 1;
+  overflow-x: auto;
+  padding: 1px 0 0 328px;
+  box-sizing: border-box;
+  position: relative;
+  gap: 30px;
+  flex-shrink: 0;
+  debug_commit: 448091;
+  z-index: 3;
+  margin-left: -360.3px;
+}
+.frame {
+  align-self: stretch;
+  overflow: hidden;
+}
+@media screen and (max-width: 1200px) {
+  .main {
+    padding-left: 164px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 750px) {
+  .main {
+    gap: 15px;
+    padding-left: 82px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .main {
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+}
