@@ -18,6 +18,7 @@ body {
     margin: 0;
     padding: 0;
     color: #f6f3f3;
+    scroll-behavior: smooth;
     /* Default text color for the entire page */
 }
 
@@ -71,16 +72,16 @@ header .navbar {
     /* Adjust hover color */
 }
 
-.home .home-desc {
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 6;
-    grid-column: 1 / 7;
+.home{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    height: 100vh;
     text-align: left;
+    padding: 20px;
+    flex-direction: column;
 }
-
 .home .home-desc h1 {
-    margin-top: 100px;
-
     color: #dbdada;
     padding: 1rem;
     font-size: 5rem;
@@ -102,17 +103,21 @@ header .navbar {
     color: #ADADAD;
 }
 
-.search-bar {
-    border-radius: 44px;
-    border: 3px solid #FFA101;
-    margin-bottom: 23px;
-    display: flex;
-    padding: 12px 12px 12px 12px;
-    box-sizing: border-box;
+.search-box {
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #FFA101;
+    padding: 0 15px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    outline: none;
+    background-color: #222;
+    color: whitesmoke;
+    margin-top: 20px;
 }
 
 .quick-search-cuisines-or-cooks {
-
     align-self: flex-start;
     overflow-wrap: break-word;
     font-family: 'Montserrat';
@@ -122,14 +127,12 @@ header .navbar {
 }
 
 .search-container {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-
 }
 
 #search {
@@ -141,7 +144,6 @@ header .navbar {
     cursor: pointer;
 }
 
-
 .search-frame {
     margin: 0 25px;
     display: flex;
@@ -149,6 +151,7 @@ header .navbar {
     align-self: flex-start;
     width: fit-content;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 
 .overlay {
@@ -162,4 +165,77 @@ header .navbar {
     padding: 16.1px 96px 0 50px;
     height: 1033px;
     box-sizing: border-box;
+}
+
+
+
+
+.about {
+    background: #f9f9f9;
+    color: #333;
+    padding: 50px 20px;
+    text-align: center;
+    min-height: 100vh;
+    margin-top: 100px;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.about h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.about p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.feature {
+    width: 30%;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    color: #c06b3e;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #777;
+}
+
+.back-to-home-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #FFA101;
+    color: #222;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.back-to-home-button:hover {
+    background-color: #e08c00;
 }
