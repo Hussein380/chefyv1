@@ -7,7 +7,6 @@
 
 body {
     background-color: #222;
-    /* Dark background color for the entire page */
     background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("../assets/background.jpg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -19,14 +18,10 @@ body {
     padding: 0;
     color: #f6f3f3;
     scroll-behavior: smooth;
-    /* Default text color for the entire page */
 }
 
 header {
-
-    /* Semi-transparent background for the header */
     z-index: 1000;
-    /* Ensure header stays on top */
 }
 
 header .navbar {
@@ -40,17 +35,14 @@ header .navbar {
 .navbar ul li {
     list-style: none;
     display: inline-block;
-
-
 }
 
 .navbar .logo img {
     position: fixed;
     left: 0;
     max-width: 1400px;
-    /* Adjust the max-width of your logo */
     height: 80px;
-    margin: o;
+    margin: 0;
 }
 
 .navbar .menu-links {
@@ -60,16 +52,13 @@ header .navbar {
 
 .navbar a {
     color: #fafafa;
-    /* Adjust text color */
     text-decoration: none;
     transition: 0.2s ease;
     padding: 10px;
-    /* Adjust padding for better click area */
 }
 
 .navbar a:hover {
     color: #c06b3e;
-    /* Adjust hover color */
 }
 
 .home{
@@ -80,19 +69,23 @@ header .navbar {
     text-align: left;
     padding: 20px;
     flex-direction: column;
+
 }
+
+
+
+
 .home .home-desc h1 {
     color: #dbdada;
-    padding: 1rem;
-    font-size: 5rem;
+    padding: 0;
+    font-size: 4rem;
     font-weight: 700;
     text-transform: capitalize;
     text-align: left;
-
 }
 
 .home .home-desc h1 span {
-    color: #e58e5e;
+    color: #FFA101;
 }
 
 .search-for-dishes-cuisines-or-cooks {
