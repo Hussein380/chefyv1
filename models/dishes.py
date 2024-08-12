@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from app import db
+from models import db
 
 class Dishes(db.Model):
     __tablename__ = "dishes"
@@ -18,8 +18,7 @@ class Dishes(db.Model):
 
     # Establish relationships
     chef = db.relationship("Chef", back_populates="dishes")
-    order_dishes = db.relationship("OrderDishes", back_populates="dish")	
-
+    order_dishes = db.relationship("OrderDishes", back_populates="dishes")
     # Define a string representation
     def __repr__(self):
         return f"<Dishes(dish_id={self.dish_id}, dish_name={self.dish_name}, price={self.price}, quantity={self.quantity}, chef_id={self.chef_id})>"

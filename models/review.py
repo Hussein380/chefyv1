@@ -1,7 +1,7 @@
 # review.py
 from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint
 from sqlalchemy.orm import relationship
-from app import db
+from models import db
 
 
 class Review(db.Model):
@@ -18,5 +18,5 @@ class Review(db.Model):
         CheckConstraint('review_rating >= 1 AND review_rating <= 5', name='check_review_rating_range'),
     )
 
-def __repr__(self):
+    def __repr__(self):
         return f"<Review(review_id={self.review_id}, review_comment={self.review_comment}, review_rating={self.review_rating}, chef_id={self.chef_id})>"

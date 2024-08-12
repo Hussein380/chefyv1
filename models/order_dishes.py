@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey, func
 from sqlalchemy.orm import relationship
-from app import db
+from models import db
 class OrderDishes(db.Model):
     __tablename__ = "order_dishes"
 
