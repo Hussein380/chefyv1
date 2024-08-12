@@ -9,27 +9,31 @@ from flask_migrate import Migrate
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
+from models import db
 
-# intialize the flask application
-app = Flask(__name__)
-app.config.from_object(Config)
+def create_app():
+    # intialize the flask application
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-# intialize SQLALchemy and Flask-Migrate
-from models import db, init_db
-init_db(app)
-migrate = Migrate(app, db)
-
-# Import models to ensure they are registered with SQLAlchemy
-from models import User, Consumer, Chef, Dishes, Media, Review, Order, OrderDishes
+    #initialize database and migration
+    db.init_app(app)
+    migrate = Migrate(app, db)
 
 
-# import blue prints
-from routes.user_routes import user_bp
+    # import blue prints
+    from routes.user_routes import user_bp
 
 
-# Register blueprints
-app.register_blueprint(user_bp, url_prefix='/user')
+    # Register blueprints
+    app.register_blueprint(user_bp, url_prefix='/user')
+
+
+
+    return app
+
 
 if __name__ == '__main__':
+    app = create_app()
     # Run the Flask application in debug mode
     app.run(debug=True)

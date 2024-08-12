@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from models import db
+from . import db
 
 class Chef(db.Model):
     __tablename__ = 'chefs'
@@ -14,11 +14,11 @@ class Chef(db.Model):
 
     # Assuming a one-to-many relationship between chefs and dishes
     user = db.relationship('User', back_populates='chef')
-    dishes = db.relationship('Dish', backref='chef', lazy=True)
+    dishes = db.relationship('Dishes', back_populates='chef', lazy=True)
     media = db.relationship('Media', back_populates='chef')  # Added
 
     # One-to-many relationship with Review
-    reviews = db.relationship('Review', backref='chef', lazy=True)
+    reviews = db.relationship('Review', back_populates='chef', lazy=True)
 
     def __repr__(self):
         return f"<Chef(chef_id={self.chef_id}, username={self.username}, email={self.email})>"

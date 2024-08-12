@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from models import db
+from . import db
 
 class Order(db.Model):
     __tablename__ = "orders"

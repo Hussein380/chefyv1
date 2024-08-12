@@ -1,7 +1,7 @@
 # review.py
 from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint
 from sqlalchemy.orm import relationship
-from models import db
+from . import db
 
 
 class Review(db.Model):

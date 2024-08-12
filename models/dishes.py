@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from models import db
+from . import db
 
 class Dishes(db.Model):
     __tablename__ = "dishes"
