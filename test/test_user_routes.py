@@ -1,7 +1,7 @@
 import sys
 import os
 import pytest
-from app import app, db
+from app import create_app, db
 
 # Add the root directory to the Python path to ensure imports work
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -11,15 +11,21 @@ def client():
     """
     Fixture for creating a test client with a fresh database for each test.
     """
+    # create a flask app instance for testing
+    app = create_app()
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/HomeMade'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+
+    # set up the test client and create a database schema
     with app.test_client() as client:
         with app.app_context():
             db.create_all()  # Create tables for testing
+        # run the tests
         yield client
         with app.app_context():
             db.drop_all()  # Drop tables after tests
 
+# test for user registration
 def test_register_user(client):
     """
     Test the user registration endpoint.
@@ -63,7 +69,7 @@ def test_update_user_profile(client):
         'username': 'updateduser'
     })  # Update username
     assert response.status_code == 200  # Check if status code is 200 (OK)
-    assert b'Profile updated successfully' in response.data  # Check for success message
+    assert b'User updated successfully' in response.data  # Check for success message
 
 def test_delete_user_account(client):
     """
@@ -78,5 +84,4 @@ def test_delete_user_account(client):
     })
     response = client.delete('/user/profile/1')  # Delete user account
     assert response.status_code == 200  # Check if status code is 200 (OK)
-    assert b'Account deleted successfully' in response.data  # Check for success message
-
+    assert b'User deleted successfully' in response.data  # Check for success message

@@ -15,8 +15,8 @@ class Order(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     # Establish relationships
-    chef = db.relationship("Chef", back_populates="orders")
-    consumer = db.relationship("Consumer", back_populates="orders")
+    chef = db.relationship("Chef", back_populates="order")
+    consumer = db.relationship("Consumer", back_populates="order")
     order_dishes = db.relationship("OrderDishes", back_populates="order")
 
     # Define a string representation

@@ -2,10 +2,13 @@ from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models import db
+from sqlalchemy.orm import Session
+import jwt
 import re
 
 # Create a blueprint for user-related routes
 user_bp = Blueprint('user', __name__)
+SECRET_KEYS = ''
 
 # Helper function to validate email format
 def is_valid_email(email):
@@ -45,7 +48,7 @@ def register():
         return jsonify({"error": "User with this email or username already exists"}), 400
 
     # Hash the password and create a new user
-    hashed_password = generate_password_hash(password, method='sha256')
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     new_user = User(username=username, email=email, password=hashed_password, role=role)
     
     # Add the new user to the database
@@ -67,6 +70,42 @@ def login():
     # Check if the user exists and the password is correct
     if not user or not check_password_hash(user.password, password):
         return jsonify({"error": "Invalid email or password"}), 401
+    
+    # Generate a token
+    token = jwt.encode({
+        'user_id': user.id,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1) # token expires in one hour
+        }, SECRET_KEY, algorithm='HS256')
 
-    return jsonify({"message": "Logged in successfully"}), 200
+    return jsonify({"token": token}), 200
+
+# Route for fetching a user profile
+@user_bp.route('/profile/<int:user_id>', methods=['GET'])
+def get_user_profile(user_id):
+    session = db.session
+    user = session.get(User, user_id)
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify({"username": user.username, "email": user.email, "role": user.role}), 200
+
+# Route for updating a user profile
+@user_bp.route('/profile/<int:user_id>', methods=['PUT'])
+def update_user_profile(user_id):
+    user = db.session.get(User, user_id)
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    data = request.get_json()
+    user.username = data.get('username', user.username)
+    db.session.commit()
+    return jsonify({"message": "User updated successfully"}), 200
+
+# Route for deleting a user account
+@user_bp.route('/profile/<int:user_id>', methods=['DELETE'])
+def delete_user_account(user_id):
+    user = db.session.get(User, user_id)
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({"message": "User deleted successfully"}), 200
 

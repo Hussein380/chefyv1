@@ -13,7 +13,7 @@ class OrderDishes(db.Model):
 
     # Establish relationships
     order = db.relationship("Order", back_populates="order_dishes")
-    dish = db.relationship("Dishes", back_populates="order_dishes")
+    dishes = db.relationship("Dishes", back_populates="order_dishes")
 
     # Define a string representation
     def __repr__(self):

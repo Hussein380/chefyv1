@@ -14,7 +14,7 @@ class Consumer(db.Model):
 
     # Relationships
     user = db.relationship('User', back_populates='consumer')
-    orders = db.relationship("Order", back_populates="consumer")
+    order = db.relationship("Order", back_populates="consumer")
 
     # Define a string representation
     def __repr__(self):

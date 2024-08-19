@@ -16,6 +16,7 @@ class Chef(db.Model):
     user = db.relationship('User', back_populates='chef')
     dishes = db.relationship('Dishes', back_populates='chef', lazy=True)
     media = db.relationship('Media', back_populates='chef')  # Added
+    order = db.relationship('Order', back_populates='chef', lazy=True)
 
     # One-to-many relationship with Review
     reviews = db.relationship('Review', back_populates='chef', lazy=True)
