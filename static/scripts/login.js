@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
+    const googleSigninButton = document.getElementById('google-signin-button');
 
     // Function to handle form submission
     loginForm.addEventListener('submit', function (event) {
@@ -10,18 +11,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = formData.get('email');
         const password = formData.get('password');
 
-        // Simulate login process (replace with actual backend integration)
-        // Assuming successful login, redirect to appropriate page
-        if (email === 'user@example.com' && password === 'password') {
-            // Example: Redirect to consumer or cook page based on role
-            window.location.href = 'consumer_home.html'; // Redirect to consumer home page
-        } else {
-            alert('Invalid email or password. Please try again.');
-        }
+        // Perform login logic here
+        fetch('/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect_url) {
+                // Redirect based on the URL returned from Flask
+                window.location.href = data.redirect_url;
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
 
     // Function to handle Google Sign-In button click
-    const googleSigninButton = document.getElementById('google-signin-button');
     googleSigninButton.addEventListener('click', function () {
         // Redirect to Google OAuth consent screen
         const redirectUri = 'http://127.0.0.1:5500/my-web/herosection.html'; // Replace with your actual redirect URI

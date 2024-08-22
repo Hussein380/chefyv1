@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/styles/signin.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/signin.css') }}">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   
   <title>Login</title>
@@ -13,7 +13,7 @@
 <body>
   <div class="container">
     <h2>Login</h2>
-    <form id="login-form">
+    <form id="login-form" action="/auth/login" method="post">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
 
@@ -23,7 +23,7 @@
       <button type="submit">Sign In</button>
 
       <!-- Google Sign-In Button -->
-      <button type="button" class="gsi-material-button">
+      <button type="button" id="google-signin-button" class="gsi-material-button">
         <div class="gsi-material-button-state"></div>
         <div class="gsi-material-button-content-wrapper">
           <div class="gsi-material-button-icon">
@@ -56,7 +56,7 @@
       </div>
     </form>
   </div>
-  <script src="../static/scripts/login.js"></script>
+  <script src="{{ url_for('static', filename='scripts/login.js') }}"></script>
 </body>
 
 </html>

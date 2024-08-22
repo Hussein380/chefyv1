@@ -1,7 +1,7 @@
 # app.py
 '''
 Sets up the Flask application (app) and the SQLAlchemy instance (db).
-mports the database models to ensure they are registered with SQLAlchemy.
+imports the database models to ensure they are registered with SQLAlchemy.
 Creates the database tables within an application context using db.create_all()
 
 '''
@@ -10,6 +10,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from models import db
+from flask import Flask, render_template
+
 
 def create_app():
     # intialize the flask application
@@ -20,15 +22,15 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
 
-
     # import blue prints
-    from routes.user_routes import user_bp
+    from routes.auth_routes import  auth_bp
+    from routes.page_routes import page_bp 
 
 
-    # Register blueprints
-    app.register_blueprint(user_bp, url_prefix='/user')
 
-
+    # Register blueprinti
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(page_bp)
 
     return app
 
