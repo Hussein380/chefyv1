@@ -25,9 +25,15 @@ def chef_dashboard():
 def cooks():
     return render_template('cooks.html')
 
-@page_bp.route('/reset-password.html')
+@page_bp.route('/reset-password')
 def reset_password():
     return render_template('reset-password.html')
+
+# route for requesting to reset password
+@page_bp.route('/request_password')
+def request_password():
+    return render_template('request_password.html')
+
 @page_bp.route('/signup.html')
 def signup():
     return render_template('signup.html')

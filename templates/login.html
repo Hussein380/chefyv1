@@ -13,7 +13,7 @@
 <body>
   <div class="container">
     <h2>Login</h2>
-    <form id="login-form" action="/auth/login" method="post">
+    <form id="login-form", method="post">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
 
@@ -50,7 +50,8 @@
       </button>
 
 
-      <a href="reset-password.html">Forgot Password?</a>
+      <a href="{{ url_for('pages.request_password') }}">Forgot Password?</a>
+
       <div class="signup-link">
         <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
       </div>

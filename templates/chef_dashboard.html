@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chef Dashboard</title>
-    <link rel="stylesheet" href="../static/styles/chef_dashboard.css">
+    <link rel="stylesheet"href="{{ url_for('static', filename='styles/chef_dashboard.css') }}"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -36,7 +36,7 @@
                 <textarea name="bio" placeholder="Tell us about yourself...">{{ chef.bio }}</textarea>
                 <input type="text" name="whatsapp" placeholder="WhatsApp Number (with country code)" value="{{ chef.whatsapp }}">
                 <div class="location-status">
-                    <input type="checkbox" id="locationToggle" name="location_enabled" {{ chef.location_enabled ? 'checked' : '' }}>
+                    <input type="checkbox" id="locationToggle" name="location_enabled" {{ 'checked' if chef.location_enabled else ''  }}>
                     <label for="locationToggle">Enable Location</label>
                 </div>
                 <button type="submit" class="btn-save">Save Changes</button>
