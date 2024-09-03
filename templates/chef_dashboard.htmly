@@ -1,0 +1,69 @@
+PE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chef_dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Chef Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#dishes">Dishes</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Profile Section -->
+        <section id="profile" class="card">
+            <h3>Profile Information</h3>
+            <form id="profileForm" method="POST" action="{{ url_for('update_profile') }}" enctype="multipart/form-data">
+                <div class="profile-picture">
+                    <img src="{{ url_for('static', filename=chef.profile_picture if chef.profile_picture else 'assets/default_profile.jpg') }}" alt="Profile Picture" class="img-circle">
+                    <input type="file" id="uploadPicture" name="profile_picture">
+                </div>
+                <input type="text" name="username" placeholder="Chef Username" value="{{ chef.username }}">
+                <input type="email" name="email" placeholder="Email Address" value="{{ chef.email }}">
+                <textarea name="bio" placeholder="Tell us about yourself...">{{ chef.bio }}</textarea>
+                <input type="text" name="whatsapp" placeholder="WhatsApp Number (with country code)" value="{{ chef.whatsapp }}">
+                <div class="location-status">
+                    <input type="checkbox" id="locationToggle" name="location_enabled" {{ 'checked' if chef.location_enabled else '' }}>
+                    <label for="locationToggle">Enable Location</label>
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </form>
+        </section>
+
+        <!-- Dishes Section -->
+        <section id="dishes" class="card">
+            <h3>Manage Dishes</h3>
+            <!-- Checkbox to toggle form visibility -->
+            <input type="checkbox" id="toggleDishForm" class="toggle-checkbox">
+            <label for="toggleDishForm" class="btn-add">Add New Dish</label>
+
+            <!-- Add Dish Form -->
+            <div id="addDishForm" class="form-container">
+                <h4>Add New Dish</h4>
+                <form method="POST" action="{{ url_for('add_dish') }}" enctype="multipart/form-data">
+                    <input type="text" name="dish_name" placeholder="Dish Name" required>
+                    <textarea name="dish_description" placeholder="Dish Description"></textarea>
+                    <input type="number" name="dish_price" placeholder="Price" required>
+                    <input type="file" name="dish_image" accept="image/*" required>
+                    <button type="submit" class="btn-save">Add Dish</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+

@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, redirect, url_for, render_templat
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from app import db, mail, serializer
+from flask_login import login_user
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer
 
@@ -37,6 +38,9 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
 
+    # log the user in
+    login_user(new_user)
+
     # Return success response and redirect based on role
     if role == 'consumer':
         return jsonify({'message': 'User created', 'redirect_url': url_for('pages.cooks')})
@@ -54,6 +58,8 @@ def login():
 
     user = User.query.filter_by(email=email).first()
     if user and check_password_hash(user.password, password):
+        # log the user in
+        login_user(user)
         if user.role == 'chef':
             return jsonify({'redirect_url': url_for('pages.chef_dashboard')})
         elif user.role == 'consumer':
@@ -129,3 +135,5 @@ def reset_password():
     # FOR GET request, render the reset form
     token = request.args.get('token') # extract the token from quesry parameters
     return render_template('reset-password.html', token=token)
+
+

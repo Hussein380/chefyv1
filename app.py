@@ -10,12 +10,23 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from models import db
+from flask_login import LoginManager
 from flask import Flask, render_template
 from flask_mail import Mail
 from itsdangerous import URLSafeTimedSerializer
-
+from models import User
 mail = Mail()
 serializer = URLSafeTimedSerializer(Config.SECRET_KEY) 
+
+# intiialize flask login
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 def create_app():
     # intialize the flask application
     app = Flask(__name__)
@@ -26,6 +37,8 @@ def create_app():
     migrate = Migrate(app, db)
     mail.init_app(app)
 
+    # initilize flask-login
+    login_manager.init_app(app)
 
     # import blue prints
     from routes.auth_routes import  auth_bp
@@ -36,6 +49,8 @@ def create_app():
     # Register blueprinti
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(page_bp)
+
+
 
     return app
 

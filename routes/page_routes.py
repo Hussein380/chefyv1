@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template
+from flask_login import login_required, current_user
+
 
 page_bp = Blueprint('pages', __name__)
 
@@ -11,19 +13,31 @@ def home():
 def contact_us():
     return render_template('contact-us.html')
 
+
 @page_bp.route('/login.html')
 def login():
     return render_template('login.html')
 
+
 # Route for chef dashboard
 @page_bp.route('/chef_dashboard.html')
+@login_required
 def chef_dashboard():
-    return render_template('chef_dashboard.html')
+    if current_user.role == 'chef':
+        return render_template('chef_dashboard.html')
+    else:
+        return render_template('cooks.html')
+
 
 # Route for cooks page
 @page_bp.route('/cooks.html')
+@login_required
 def cooks():
-    return render_template('cooks.html')
+    if current_user.role == 'consumer':
+        return render_template('cooks.html')
+    else:
+        return render_template('chef_dashboard.html')
+
 
 @page_bp.route('/reset-password')
 def reset_password():
