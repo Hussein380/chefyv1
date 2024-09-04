@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-
+from models.chef import Chef
 
 page_bp = Blueprint('pages', __name__)
 
@@ -24,7 +24,12 @@ def login():
 @login_required
 def chef_dashboard():
     if current_user.role == 'chef':
-        return render_template('chef_dashboard.html')
+        chef = Chef.query.filter_by(user_id=current_user.id).first()
+        print(f"Chef object: {chef}")
+        if chef:
+            return render_template('chef_dashboard.html', chef=chef)
+        return ("chef not found")
+
     else:
         return render_template('cooks.html')
 

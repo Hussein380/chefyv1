@@ -1,203 +1,245 @@
-
-/* General */
+/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background: #f5f5f5;
     margin: 0;
     padding: 0;
+    display: flex;
+    min-height: 100vh;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 220px;
-    background-color: #343a40;
-    padding: 20px;
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
     height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
-    color: #fff;
+    overflow-y: auto;
 }
 
 .sidebar h2 {
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
+    font-size: 24px;
 }
 
 .sidebar nav ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 .sidebar nav ul li {
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 .sidebar nav ul li a {
+    color: white;
     text-decoration: none;
-    color: #ddd;
-    padding: 10px;
+    font-weight: 500;
     display: block;
-    transition: background 0.3s;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 .sidebar nav ul li a:hover {
-    background: #495057;
+    background-color: #34495e;
 }
 
-/* Content Area */
+/* Main Content */
 .content {
-    margin-left: 220px;
+    flex-grow: 1;
     padding: 20px;
+    box-sizing: border-box;
+    margin-left: 250px; /* Adjusting for fixed sidebar */
 }
 
-/* Cards */
+/* Card Styles */
 .card {
-    background: white;
+    background-color: #ecf0f1;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile Section */
+/* Headings */
+.card h3 {
+    margin-top: 0;
+    font-size: 22px;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+/* Profile Picture */
 .profile-picture {
-    text-align: center;
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 .profile-picture img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
 }
 
-.profile-picture input[type="file"] {
-    display: block;
-    margin: 10px auto;
-}
-
-.rating-location {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.location-status {
-    display: flex;
-    align-items: center;
-}
-
-.location-status input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-button {
-    cursor: pointer;
-    padding: 10px 15px;
-    border: none;
+/* Form Elements */
+input[type="text"],
+input[type="email"],
+textarea,
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #bdc3c7;
     border-radius: 4px;
-    margin: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+    border: none;
+    color: white;
+    font-size: 16px;
 }
 
 .btn-save {
-    background-color: #28a745;
-    color: white;
+    background-color: #3498db;
 }
 
-/* Add Dish Form */
+.btn-save:hover {
+    background-color: #2980b9;
+}
+
+.btn-cancel {
+    background-color: #7f8c8d;
+}
+
+.btn-cancel:hover {
+    background-color: #95a5a6;
+}
+
+.btn-edit-profile {
+    background-color: #f39c12;
+}
+
+.btn-edit-profile:hover {
+    background-color: #e67e22;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Form Container for Profile Edit */
 .form-container {
-    background: #f8f9fa;
+    background-color: #ecf0f1;
     padding: 20px;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.form-container form {
+/* Button Group */
+.button-group {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 }
 
-.form-container input[type="text"],
-.form-container input[type="number"],
-.form-container textarea,
-.form-container input[type="file"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-container button {
-    align-self: flex-start;
-    margin-top: 10px;
-}
-
-/* Show/Hide Add Dish Form */
-#showAddDishForm {
-    display: block;
-    margin: 20px auto;
-}
-
-/* Dish Management */
-#dishList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.dish-item {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    width: 200px;
-}
-
-.dish-item img {
-    max-width: 100%;
-    border-radius: 8px;
-}
-
-.dish-item h4 {
-    margin: 10px 0;
-}
-
-.dish-item p {
-    margin: 5px 0;
-}
-
-/* Show/Hide Add Dish Form */
+/* Dishes Section - Add Dish Form */
 #addDishForm {
-    display: none; /* Initially hidden */
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-/* Checkbox to control form visibility */
-.toggle-checkbox {
-    display: none; /* Hide the checkbox itself */
+#addDishForm .form-group {
+    margin-bottom: 15px;
 }
 
-/* Label as a button to toggle the checkbox */
-.btn-add {
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-align: center;
-    display: inline-block;
-    margin: 20px 0;
+#addDishForm .form-group input,
+#addDishForm .form-group textarea {
+    margin-bottom: 10px;
 }
 
-/* Display form when checkbox is checked */
-.toggle-checkbox:checked ~ #addDishForm {
-    display: block; /* Show form */
+.btn-add-dish {
+    background-color: #2ecc71;
+    color: #fff;
 }
 
-/* Change button style when checkbox is checked */
-.toggle-checkbox:checked + .btn-add {
-    background-color: #dc3545; /* Change to a different color when active */
+.btn-add-dish:hover {
+    background-color: #27ae60;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .btn-save,
+    .btn-cancel,
+    .btn-edit-profile,
+    .btn-delete,
+    .btn-add-dish {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    
+    .profile-picture img {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+    }
 }
 

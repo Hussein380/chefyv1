@@ -25,7 +25,7 @@ login_manager.login_view = 'auth.login'
 
 @login_manager.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return db.session.get(User, int(id))
 
 def create_app():
     # intialize the flask application
@@ -43,12 +43,13 @@ def create_app():
     # import blue prints
     from routes.auth_routes import  auth_bp
     from routes.page_routes import page_bp 
-
+    from routes.chef_route import chef_bp  # Import chef_bp here
 
 
     # Register blueprinti
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(page_bp)
+    app.register_blueprint(chef_bp, url_prefix='/chef')
 
 
 

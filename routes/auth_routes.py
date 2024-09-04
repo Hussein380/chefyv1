@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect, url_for, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
+from models.chef import Chef
 from app import db, mail, serializer
 from flask_login import login_user
 from flask_mail import Message
@@ -40,6 +41,12 @@ def signup():
 
     # log the user in
     login_user(new_user)
+
+    #  create chef profile if the user is chef
+    if role == 'chef':
+        new_chef = Chef(user_id=new_user.id, username=new_user.email)
+        db.session.add(new_chef)
+        db.session.commit()
 
     # Return success response and redirect based on role
     if role == 'consumer':

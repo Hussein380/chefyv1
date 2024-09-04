@@ -12,6 +12,7 @@ class Chef(db.Model):
     bio = db.Column(db.String(100))
     profile_picture = db.Column(db.String(255))
     rating = db.Column(db.Float)
+    whatsapp = db.Column(db.String(20))
 
     # Assuming a one-to-many relationship between chefs and dishes
     user = db.relationship('User', back_populates='chef')
@@ -23,4 +24,4 @@ class Chef(db.Model):
     reviews = db.relationship('Review', back_populates='chef', lazy=True)
 
     def __repr__(self):
-        return f"<Chef(chef_id={self.chef_id}, username={self.username}, email={self.email})>"
+        return f"<Chef(chef_id={self.chef_id}, username={self.username}>"
