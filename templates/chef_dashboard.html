@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chef Dashboard</title>
-    <link rel="stylesheet" href="../static/styles/chef_dashboard.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chef_dashboard.css') }}">
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -27,21 +28,23 @@
         <section id="profile" class="card">
             <h3>Profile Information</h3>
             <form id="profileForm" method="POST" enctype="multipart/form-data">
+                <!-- Profile Picture -->
                 <div class="profile-picture">
                     <img id="profileImagePreview" src="{{ url_for('static', filename='images/default_profile.jpg') }}" alt="Profile Picture" class="img-circle">
-                    <input type="file" id="uploadPicture" name="profile_picture" onchange="previewProfileImage(event)">
+                    <input type="file" id="uploadPicture" name="profile_picture">
                 </div>
+                <!-- Username, Bio, etc. -->
                 <div class="form-group">
                     <label for="username">Chef Username:</label>
                     <input type="text" id="username" name="username" placeholder="Chef Username" value="{{ chef.username }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" placeholder="Email Address" value="{{ chef.email }}" required>
-                </div>
-                <div class="form-group">
                     <label for="bio">Bio:</label>
                     <textarea id="bio" name="bio" placeholder="Tell us about yourself...">{{ chef.bio }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cuisineTypes">Specialties/Cuisine Types:</label>
+                    <input type="text" name="cuisine_types" id="cuisineTypes" placeholder="Cuisine Types (what do you specialize in?)" value="{{ chef.cuisine_types }}">
                 </div>
                 <div class="form-group">
                     <label for="whatsapp">WhatsApp Number (with country code):</label>
@@ -51,45 +54,8 @@
                     <input type="checkbox" id="locationToggle" name="location_enabled" {{ 'checked' if chef.location_enabled else '' }}>
                     <label for="locationToggle">Enable Location</label>
                 </div>
-                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="submit" class="btn-save" id="saveChanges">Save Changes</button>
             </form>
-
-            <!-- Edit Profile Button -->
-            <button class="btn-edit-profile" onclick="toggleEditProfile()">Edit Profile</button>
-
-            <!-- Profile Editing Form -->
-            <div id="editProfileForm" class="form-container" style="display: none;">
-                <h3>Edit Your Profile</h3>
-                <form method="POST" enctype="multipart/form-data">
-                    <!-- Profile Picture -->
-                    <div class="profile-picture">
-
-                        <input type="file" name="profile_picture" onchange="previewProfileImage(event)">
-                    </div>
-
-                    <!-- Name -->
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ chef.name }}">
-
-                    <!-- Bio -->
-                    <label for="bio">Bio</label>
-                    <textarea id="bio" name="bio">{{ chef.bio }}</textarea>
-
-                    <!-- Location -->
-                    <label for="location">Location</label>
-                    <input type="text" id="location" name="location" value="{{ chef.location }}">
-
-                    <!-- Specialties -->
-                    <label for="specialties">Specialties</label>
-                   
-
-                    <!-- Save and Cancel Buttons -->
-                    <div class="button-group">
-                        <button type="submit" class="btn-save">Save Changes</button>
-                        <button type="button" class="btn-cancel" onclick="toggleEditProfile()">Cancel</button>
-                    </div>
-                </form>
-            </div>
 
             <!-- Delete Profile Button -->
             <button id="deleteProfile" class="btn-delete">Delete Profile</button>

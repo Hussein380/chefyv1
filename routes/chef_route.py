@@ -18,11 +18,43 @@ def uploaded_file(filename):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@chef_bp.route('/api/chef/create_profile', methods=['POST'])
+@login_required
+def create_profile():
+    """ create a new profile for a chef. This is used when a user registres as a chef
+    and needs to set up their profile for the first time.""" 
+    username = request.form.get('username')
+    bio = request.form.get('bio')
+    whatsapp = request.form.get('whatsapp')
+    location_enabled = ('location_enabled') in request.form
+
+    # chef if profile already exists
+    if chef.query.filter_by(user_id=current_user.id).first():
+        return jsonify({"error": "profile already exists"}), 400
+
+    # if not exisst we create it and put it in database
+    new_chef = Chef(
+            user_id=current_user.id,
+            username=username,
+            bio=bio,
+            whatsapp=whatsapp,
+            location_enabled=location_enabled
+            )
+    db.session.add(new_chef)
+    db.session.commit()
+
+    # return a message to show you successfully created
+    return jsonify({"success": "profile created successfully"})
+
+
+
+
 @chef_bp.route('/api/chef/profile', methods=['GET'])
 @login_required
 def get_profile():
     """
     Retrieve the profile information for the logged-in chef.
+    Return the profile data in JSON format for the  frontend.
     """
     chef = Chef.query.filter_by(user_id=current_user.id).first()
     if chef:
@@ -73,4 +105,21 @@ def update_profile():
     db.session.commit()
 
     return jsonify({"success": "Profile updated successfully"})
+
+
+@chef_bp.route('/api/chef/delete-profile', methods=['DELETE'])
+@login_required
+def delete_profile():
+    """
+    Delete the profiles of the logged-in chef
+    """
+    chef = chef.query.filter_by(user_id=current_user.id).first()
+    # return error if chef is not found
+    if not chef:
+        return jsonify({"error": "chef not found"}), 404
+    # delete from the db
+    db.session.delete(chef)
+    db.session.commit()
+
+    return jsonify({"success": "profile deleted successfully"})
 

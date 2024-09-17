@@ -11,6 +11,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     role = db.Column(db.Enum('consumer', 'chef'), nullable=False, default='consumer') # Or use a separate Role table
+    longitude = db.Column(db.Float, nullable=True)
+    latitude = db.Column(db.Float, nullable=True)
 
     # Relationships
     consumer = db.relationship('Consumer', uselist=False, back_populates='user')

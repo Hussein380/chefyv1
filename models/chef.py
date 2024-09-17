@@ -13,6 +13,8 @@ class Chef(db.Model):
     profile_picture = db.Column(db.String(255))
     rating = db.Column(db.Float)
     whatsapp = db.Column(db.String(20))
+    cuisine_types = db.Column(db.String(255))  # Store as comma-separated values
+
 
     # Assuming a one-to-many relationship between chefs and dishes
     user = db.relationship('User', back_populates='chef')
