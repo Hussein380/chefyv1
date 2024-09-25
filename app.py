@@ -49,7 +49,7 @@ def create_app():
     # Register blueprinti
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(page_bp)
-    app.register_blueprint(chef_bp, url_prefix='/chef')
+    app.register_blueprint(chef_bp)
 
 
 

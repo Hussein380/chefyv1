@@ -4,8 +4,11 @@ from flask_login import login_required, current_user
 from models.chef import Chef
 from app import db
 import os
+from flask import send_from_directory
+
 
 chef_bp = Blueprint('chef_bp', __name__)
+
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -29,7 +32,7 @@ def create_profile():
     location_enabled = ('location_enabled') in request.form
 
     # chef if profile already exists
-    if chef.query.filter_by(user_id=current_user.id).first():
+    if Chef.query.filter_by(user_id=current_user.id).first():
         return jsonify({"error": "profile already exists"}), 400
 
     # if not exisst we create it and put it in database
@@ -113,7 +116,7 @@ def delete_profile():
     """
     Delete the profiles of the logged-in chef
     """
-    chef = chef.query.filter_by(user_id=current_user.id).first()
+    chef = Chef.query.filter_by(user_id=current_user.id).first()
     # return error if chef is not found
     if not chef:
         return jsonify({"error": "chef not found"}), 404

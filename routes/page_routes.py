@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
+
 from models.chef import Chef
 
 page_bp = Blueprint('pages', __name__)
@@ -28,7 +29,7 @@ def chef_dashboard():
         print(f"Chef object: {chef}")
         if chef:
             return render_template('chef_dashboard.html', chef=chef)
-        return ("chef not found")
+        return render_template('chef_dashboard.html', chef=chef)
 
     else:
         return render_template('cooks.html')
