@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dishes</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        img {
+            width: 150px;  /* Reduced image size */
+            height: auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 20px 0;
+            border: 1px solid white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #FFD700;  /* Gold color for dish names */
+        }
+        p {
+            color: #A9A9A9;  /* Dark gray color for other text */
+        }
+        button {
+            background-color: #4CAF50;  /* Green button color */
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;  /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Dishes</h1>
+    <ul>
+        {% for dish in dishes %}
+        <li>
+            <h2>{{ dish.dish_name }}</h2>
+            <p>{{ dish.description }}</p>
+            <p>Price: ${{ dish.price }}</p>
+            <img src="{{ url_for('static', filename='uploads/' + dish.dish_image) }}" alt="{{ dish.dish_name }}">
+            <p>Likes: <span id="likes-count-{{ dish.dish_id }}">{{ dish.likes }}</span>
+            <button onclick="likeDish({{ dish.dish_id }})">❤️ Like</button></p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function likeDish(dishId) {
+            fetch(`/api/dish/like/${dishId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the likes count in the HTML
+                document.getElementById(`likes-count-${dishId}`).innerText = data.likes;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

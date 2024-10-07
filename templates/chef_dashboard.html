@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chef Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chef_dashboard.css') }}">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -27,62 +26,62 @@
         <!-- Profile Section -->
         <section id="profile" class="card">
             <h3>Profile Information</h3>
-             <div id="loadingIndicator" style="display: none;">Loading...</div>
             <form id="profileForm" method="POST" enctype="multipart/form-data">
-                <!-- Profile Picture -->
                 <div class="profile-picture">
-                    <img id="profileImagePreview" src="{{ url_for('static', filename='images/default_profile.jpg') }}" alt="Profile Picture" class="img-circle">
+                    <img id="profileImagePreview" src="{{ url_for('static', filename='images/default_profile.png') }}" alt="Profile Picture">
                     <input type="file" id="uploadPicture" name="profile_picture">
                 </div>
-                <!-- Username, Bio, etc. -->
                 <div class="form-group">
                     <label for="username">Chef Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Chef Username" value="{{ chef.username }}" required>
+                    <input type="text" id="username" name="username" placeholder="Chef Username" value="rensonkipngeno@gmail.com">
                 </div>
                 <div class="form-group">
                     <label for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" placeholder="Tell us about yourself...">{{ chef.bio }}</textarea>
+                    <textarea id="bio" name="bio" placeholder="Tell us about yourself...">im a good boy</textarea>
                 </div>
                 <div class="form-group">
                     <label for="cuisineTypes">Specialties/Cuisine Types:</label>
-                    <input type="text" name="cuisine_types" id="cuisineTypes" placeholder="Cuisine Types (what do you specialize in?)" value="{{ chef.cuisine_types }}">
+                    <input type="text" name="cuisine_types" id="cuisineTypes" placeholder="Cuisine Types">
                 </div>
                 <div class="form-group">
                     <label for="whatsapp">WhatsApp Number (with country code):</label>
-                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" value="{{ chef.whatsapp }}" required>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" value="+254748623437">
                 </div>
                 <div class="location-status">
-                    <input type="checkbox" id="locationToggle" name="location_enabled" {{ 'checked' if chef.location_enabled else '' }}>
+                    <input type="checkbox" id="locationToggle" name="location_enabled" checked>
                     <label for="locationToggle">Enable Location</label>
                 </div>
                 <button type="submit" class="btn-save" id="saveChanges">Save Changes</button>
             </form>
-
-            <!-- Delete Profile Button -->
             <button id="deleteProfile" class="btn-delete">Delete Profile</button>
         </section>
 
         <!-- Dishes Section -->
         <section id="dishes" class="card">
             <h3>Manage Dishes</h3>
-            <input type="checkbox" id="toggleDishForm" class="toggle-checkbox">
-            <label for="toggleDishForm" class="btn-add">Add New Dish</label>
+
+            <!-- Toggle for Add New Dish Form -->
+            <button id="toggleDishForm" class="btn-add">Add New Dish</button>
 
             <!-- Add Dish Form -->
-            <div id="addDishForm" class="form-container">
+            <div id="addDishForm" class="form-container" style="display: none;">
                 <h4>Add New Dish</h4>
-                <form id="newDishForm" method="POST" enctype="multipart/form-data">
+                <form id="newDishForm" method="POST" action="{{ url_for('dish_bp.add_dish') }}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="dish_name">Dish Name:</label>
-                        <input type="text" id="dish_name" name="dish_name" placeholder="Dish Name" required>
+                        <input type="text" id="dish_name" name="dish_name" placeholder="Enter dish name" required>
                     </div>
                     <div class="form-group">
                         <label for="dish_description">Dish Description:</label>
-                        <textarea id="dish_description" name="dish_description" placeholder="Dish Description"></textarea>
+                        <textarea id="dish_description" name="dish_description" placeholder="Enter dish description" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="dish_price">Price:</label>
-                        <input type="number" id="dish_price" name="dish_price" placeholder="Price" required>
+                        <input type="number" id="dish_price" name="dish_price" placeholder="Enter dish price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" placeholder="Enter dish quantity" required>
                     </div>
                     <div class="form-group">
                         <label for="dish_image">Dish Image:</label>
@@ -91,10 +90,35 @@
                     <button type="submit" class="btn-save">Add Dish</button>
                 </form>
             </div>
+
+            <!-- Display Dishes -->
+            <div id="dishList">
+                <h3>List of Dishes</h3>
+                {% for dish in dishes %}
+                <div class="dish-card">
+                    <h4>{{ dish.name }}</h4>
+                    <p>Price: ${{ dish.price }}</p>
+                    <button class="like-btn" data-dish-id="{{ dish.id }}">
+                        Like (<span id="like-count-{{ dish.id }}">{{ dish.like_count }}</span>)
+                    </button>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
         </section>
     </div>
-    <script src="{{ url_for('static', filename='scripts/chef_dashboard.js') }}"></script>
+
+    <script>
+        // Toggle the Add Dish form
+        document.getElementById('toggleDishForm').addEventListener('click', function() {
+            var addDishForm = document.getElementById('addDishForm');
+            if (addDishForm.style.display === 'none') {
+                addDishForm.style.display = 'block';
+            } else {
+                addDishForm.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
-
