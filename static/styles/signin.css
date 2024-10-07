@@ -13,6 +13,44 @@ body {
     margin: 0;
 }
 
+
+/* Styles for links */
+a {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+/* Hover effect for links */
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styles for the signup link section */
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Styles for the paragraph in the signup link section */
+.signup-link p {
+    margin: 0;
+    color: #ccc;
+}
+
+/* Styles for the signup link */
+.signup-link a {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Hover effect for the signup link */
+.signup-link a:hover {
+    color: #45a049;
+}
+
 /* Styles for the container */
 .container {
     /* Dark background with transparency */
