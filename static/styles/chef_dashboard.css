@@ -1,4 +1,4 @@
-	/* General Styles */
+/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -195,6 +195,35 @@ button {
     background-color: #27ae60;
 }
 
+/* Like Button Styles */
+.like-button {
+    background-color: transparent;
+    border: none;
+    color: #e74c3c; /* Heart color */
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.heart-icon {
+    transition: color 0.3s ease;
+}
+
+.like-button.liked .heart-icon {
+    color: #e74c3c; /* Red when liked */
+}
+
+.like-count {
+    margin-left: 5px;
+    font-size: 18px;
+}
+
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 768px) {
     .sidebar {
@@ -235,7 +264,7 @@ button {
         font-size: 14px;
         padding: 8px 16px;
     }
-    
+
     .profile-picture img {
         width: 80px;
         height: 80px;
@@ -272,6 +301,7 @@ label[for="cuisineTypes"] {
     box-sizing: border-box;
     font-size: 16px;
 }
+
 /* Confirmation message styles */
 .confirmation-message {
     position: fixed;
@@ -295,6 +325,7 @@ label[for="cuisineTypes"] {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
 .toast {
     position: fixed;
     bottom: 20px;
@@ -314,3 +345,15 @@ label[for="cuisineTypes"] {
     background-color: red;
 }
 
+/* General styling for the dish card */
+.dish-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.dish-card h4 {
+    margin: 0;
+    padding-bottom: 5px;
+}

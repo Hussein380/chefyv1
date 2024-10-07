@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             location: '<3km',
             contactEmail: 'john.doe@example.com',
             menu: [
-                { dish: 'Spaghetti Carbonara', description: 'Classic Kenyan pasta dish with eggs, cheese, and pancetta.', price: '$15' },
-                { dish: 'Margherita Pizza', description: 'Traditional Italian pizza with tomato, mozzarella, and basil.', price: '$12' }
+                { dish: 'Spaghetti Carbonara', description: 'Classic Kenyan pasta dish with eggs.', price: '$15' },
+                { dish: 'Margherita Pizza', description: 'Traditional Italian pizza with tomato.', price: '$12' }
             ],
             reviews: [
                 { user: 'Alice', comment: 'John\'s pasta is incredible!', rating: 5 },
@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
             bio: 'Specializes in vegan and gluten-free dishes.',
             image: 'jane.jpg',
             specialties: 'Vegan and Gluten-Free',
-            location: ' <7km',
+            location: '<7km',
             contactEmail: 'jane.smith@example.com',
             menu: [
-                { dish: 'Vegan Pad Nairobi', description: 'Traditional kenyan dish with eggs, peanuts, and rice noodles.', price: 'kes 1800' },
+                { dish: 'Vegan Pad Nairobi', description: 'Traditional Kenyan dish with eggs, peanuts.', price: 'kes 1800' },
                 { dish: 'Gluten-Free Chocolate Cake', description: 'Decadent chocolate cake made without gluten.', price: 'kes 1000' }
             ],
             reviews: [
@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="${cook.foodLink}" target="_blank">Explore Food</a>
             <button class="see-more-btn">See More</button>
             <button class="contact-btn" style="display:none;">Contact Chef</button>
+            <button class="like-btn">❤️ Like</button> <!-- Like Button -->
+            <span class="like-count">0</span> <!-- Like Count -->
         `;
 
         profilesContainer.appendChild(profileCard);
@@ -97,8 +99,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add functionality to the contact button
         const contactBtn = profileCard.querySelector('.contact-btn');
         contactBtn.addEventListener('click', function() {
-            // Implement contact or booking form functionality here
             alert(`Contact form for ${cook.name} would go here!`);
+        });
+
+        // Add functionality to the like button
+        const likeBtn = profileCard.querySelector('.like-btn');
+        const likeCount = profileCard.querySelector('.like-count');
+        let count = 0;
+
+        likeBtn.addEventListener('click', function() {
+            count++;
+            likeCount.textContent = count;
         });
     }
 
@@ -107,4 +118,3 @@ document.addEventListener('DOMContentLoaded', function() {
         createProfileCard(cook);
     });
 });
-

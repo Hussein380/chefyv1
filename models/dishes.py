@@ -15,6 +15,7 @@ class Dishes(db.Model):
     chef_id = db.Column(db.Integer, ForeignKey("chefs.chef_id"))
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    likes = db.Column(db.Integer, default=0)
 
     # Establish relationships
     chef = db.relationship("Chef", back_populates="dishes")
