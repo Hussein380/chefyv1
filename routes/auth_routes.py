@@ -12,6 +12,13 @@ auth_bp = Blueprint('auth', __name__)
 
 # Serializer to generate and decode tokens for secure password reset links
 
+
+# Route to render the signup page
+@auth_bp.route('/signup', methods=['GET'])
+def signup_page():
+    return render_template('signup.html')  # Ensure this template exists
+
+
 # Route to handle sign-up requests
 @auth_bp.route('/signup', methods=['POST'])
 def signup():

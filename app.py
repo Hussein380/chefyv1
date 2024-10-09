@@ -45,6 +45,7 @@ def create_app():
     from routes.page_routes import page_bp 
     from routes.chef_route import chef_bp
     from routes.proximity_route import proximity_bp
+    from routes.dish_routes import dish_bp  # Import the dish blueprint
 
 
 
@@ -53,6 +54,8 @@ def create_app():
     app.register_blueprint(page_bp)
     app.register_blueprint(chef_bp)
     app.register_blueprint(proximity_bp)
+    app.register_blueprint(dish_bp)  # Register the dish blueprint
+
 
 
 
