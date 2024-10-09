@@ -50,7 +50,7 @@
         <li>
             <h2>{{ dish.dish_name }}</h2>
             <p>{{ dish.description }}</p>
-            <p>Price: ${{ dish.price }}</p>
+            <p>Price: kes{{ dish.price }}</p>
             <img src="{{ url_for('static', filename='uploads/' + dish.dish_image) }}" alt="{{ dish.dish_name }}">
             <p>Likes: <span id="likes-count-{{ dish.dish_id }}">{{ dish.likes }}</span>
             <button onclick="likeDish({{ dish.dish_id }})">❤️ Like</button></p>

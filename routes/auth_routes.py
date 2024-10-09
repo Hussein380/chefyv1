@@ -55,7 +55,7 @@ def signup():
     #  create chef profile if the user is chef
     if role == 'chef':
 
-        new_chef = Chef(user_id=new_user.id, username=new_user.email, latitude=latitude, longitude=longitude)
+        new_chef = Chef(chef_id=new_user.id, user_id =new_user.id, username=new_user.email, latitude=latitude, longitude=longitude)
         
         db.session.add(new_chef)
         db.session.commit()

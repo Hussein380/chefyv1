@@ -151,3 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load profile data when the page is loaded
     getProfile();
 });
+
+
+document.getElementById('toggleDishForm').addEventListener('click', function() {
+	var addDishForm = document.getElementById('addDishForm');
+	if (addDishForm.style.display === 'none') {
+		addDishForm.style.display = 'block';
+	} else {
+		addDishForm.style.display = 'none';
+	}
+});
