@@ -16,10 +16,15 @@
             <p>{{ dish.description }}</p>
             <p>Price: kes{{ dish.price }}</p>
             <img src="{{ url_for('static', filename='uploads/' + dish.dish_image) }}" alt="{{ dish.dish_name }}">
+            <p>Likes: <span id="likes-count-{{ dish.dish_id }}">{{ dish.likes }}</span></p>
+            <!-- Like button remains in the template -->
+            <button onclick="likeDish({{ dish.dish_id }})">❤️Like</button>
         </li>
         {% endfor %}
     </ul>
 
-    <!-- Remove script as no buttons need functionality -->
+    <!-- Link to external JavaScript file in the 'scripts' folder -->
+    <script src="{{ url_for('static', filename='scripts/view_dishes.js') }}"></script>
 </body>
 </html>
+
