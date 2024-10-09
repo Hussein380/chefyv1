@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/chef_dashboard.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -28,16 +26,16 @@
             <h3>Profile Information</h3>
             <form id="profileForm" method="POST" enctype="multipart/form-data">
                 <div class="profile-picture">
-                    <img id="profileImagePreview" src="{{ url_for('static', filename='images/default_profile.png') }}" alt="Profile Picture">
+                    <img id="profileImagePreview" src="{{ url_for('static', filename='assets/default_profile.png') }}" alt="Profile Image">
                     <input type="file" id="uploadPicture" name="profile_picture">
                 </div>
                 <div class="form-group">
                     <label for="username">Chef Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Chef Username" value="rensonkipngeno@gmail.com">
+                    <input type="text" id="username" name="username" placeholder="Chef Username" value" ">
                 </div>
                 <div class="form-group">
                     <label for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" placeholder="Tell us about yourself...">im a good boy</textarea>
+                    <textarea id="bio" name="bio" placeholder="Tell us about yourself..."> </textarea>
                 </div>
                 <div class="form-group">
                     <label for="cuisineTypes">Specialties/Cuisine Types:</label>
@@ -45,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="whatsapp">WhatsApp Number (with country code):</label>
-                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" value="+254748623437">
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" value="">
                 </div>
                 <div class="location-status">
                     <input type="checkbox" id="locationToggle" name="location_enabled" checked>
@@ -59,11 +57,7 @@
         <!-- Dishes Section -->
         <section id="dishes" class="card">
             <h3>Manage Dishes</h3>
-
-            <!-- Toggle for Add New Dish Form -->
             <button id="toggleDishForm" class="btn-add">Add New Dish</button>
-
-            <!-- Add Dish Form -->
             <div id="addDishForm" class="form-container" style="display: none;">
                 <h4>Add New Dish</h4>
                 <form id="newDishForm" method="POST" action="{{ url_for('dish_bp.add_dish') }}" enctype="multipart/form-data">
@@ -91,7 +85,6 @@
                 </form>
             </div>
 
-            <!-- Display Dishes -->
             <div id="dishList">
                 <h3>List of Dishes</h3>
                 {% for dish in dishes %}
@@ -107,18 +100,8 @@
             </div>
         </section>
     </div>
-
-    <script>
-        // Toggle the Add Dish form
-        document.getElementById('toggleDishForm').addEventListener('click', function() {
-            var addDishForm = document.getElementById('addDishForm');
-            if (addDishForm.style.display === 'none') {
-                addDishForm.style.display = 'block';
-            } else {
-                addDishForm.style.display = 'none';
-            }
-        });
-    </script>
+    <div id="loadingIndicator" style="display: none;">Loading...</div>
+    <script src="{{ url_for('static', filename='scripts/chef_dashboard.js') }}"></script>
 </body>
-
 </html>
+

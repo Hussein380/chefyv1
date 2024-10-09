@@ -43,13 +43,19 @@ def create_app():
     # import blue prints
     from routes.auth_routes import  auth_bp
     from routes.page_routes import page_bp 
-    from routes.chef_route import chef_bp  # Import chef_bp here
+    from routes.chef_route import chef_bp
+    from routes.proximity_route import proximity_bp
+    from routes.dish_routes import dish_bp  # Import the dish blueprint
+
 
 
     # Register blueprinti
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(page_bp)
     app.register_blueprint(chef_bp)
+    app.register_blueprint(proximity_bp)
+    app.register_blueprint(dish_bp)  # Register the dish blueprint
+
 
 
 

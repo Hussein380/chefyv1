@@ -15,6 +15,8 @@ class Chef(db.Model):
     whatsapp = db.Column(db.String(20))
     cuisine_types = db.Column(db.String(255))  # Store as comma-separated values
     location_enabled = db.Column(db.Boolean, default=False)  # Add this line
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
 
     # Assuming a one-to-many relationship between chefs and dishes
     user = db.relationship('User', back_populates='chef')

@@ -1,24 +1,34 @@
-from flask import Blueprint, request, jsonify, redirect, url_for, render_template
+from flask import Blueprint, request, jsonify, redirect, url_for, render_template, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models.chef import Chef
 from app import db, mail, serializer
 from flask_login import login_user
 from flask_mail import Message
+from flask_login import login_required, current_user
 from itsdangerous import URLSafeTimedSerializer
 
 auth_bp = Blueprint('auth', __name__)
 
 # Serializer to generate and decode tokens for secure password reset links
 
+
+# Route to render the signup page
+@auth_bp.route('/signup', methods=['GET'])
+def signup_page():
+    return render_template('signup.html')  # Ensure this template exists
+
+
 # Route to handle sign-up requests
 @auth_bp.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
-    email = data.get('email')
+    email = data.get('email').strip()
     password = data.get('password')
     confirm_password = data.get('confirm_password')
     role = data.get('role')
+    latitude = data.get('latitude')
+    longitude = data.get('longitude')
 
     # validate input fields
     if not all([email, password, confirm_password, role]):
@@ -29,7 +39,7 @@ def signup():
         return jsonify({'error': 'Passwords do not match'}), 400
 
     # Check if user already exists
-    existing_user = User.query.filter_by(email=email).first()
+    existing_user = User.query.filter_by(email=email.lower()).first()
     if existing_user:
         return jsonify({'error': 'User already exists'}), 400
 
@@ -44,9 +54,18 @@ def signup():
 
     #  create chef profile if the user is chef
     if role == 'chef':
-        new_chef = Chef(user_id=new_user.id, username=new_user.email)
+
+        new_chef = Chef(chef_id=new_user.id, user_id =new_user.id, username=new_user.email, latitude=latitude, longitude=longitude)
+        
         db.session.add(new_chef)
         db.session.commit()
+        print("Chef's location in the database", latitude, longitude)
+    # store the location in session
+    if role == 'consumer':
+        session['latitude'] = latitude
+        session['longitude'] = longitude
+        print("Latitude stored in session:", session['latitude'])
+        print("Longitude stored in session:", session['longitude'])
 
     # Return success response and redirect based on role
     if role == 'consumer':
@@ -67,12 +86,55 @@ def login():
     if user and check_password_hash(user.password, password):
         # log the user in
         login_user(user)
+
+        collect_location = False
+
         if user.role == 'chef':
-            return jsonify({'redirect_url': url_for('pages.chef_dashboard')})
+            chef = Chef.query.filter_by(user_id=user.id).first()
+            if chef and (chef.latitude is None or chef.longitude is None):
+                collected_location = True
+            return jsonify({'redirect_url': url_for('pages.chef_dashboard'),  'collect_location': collect_location})
+
         elif user.role == 'consumer':
-            return jsonify({'redirect_url': url_for('pages.cooks')})
+            # consumer provide their location during login
+            latitude = data.get('latitude')
+            longitude = data.get('longitude')
+
+            # store the consumers location in session if available
+            session['latitude'] = latitude
+            session[' longitude'] = longitude
+
+            return jsonify({'redirect_url': url_for('pages.cooks'), 'role': 'consumer'})
     return jsonify({'error': 'Invalid email or password'}), 401
 
+
+
+# Route to update user's location after login
+@auth_bp.route('/update-location', methods=['POST'])
+@login_required
+def update_location():
+    data = request.get_json()
+    latitude = data.get('latitude')
+    longitude = data.get('longitude')
+
+    if current_user.role == 'consumer':
+        # update the location in session
+        session['latitude'] = latitude
+        session['longitude'] = longitude
+        return jsonify({'message': 'Chef location updated successfully!'}), 200
+    elif current_user.role == 'chef':
+        # check if loaction has already beeen collected for the chef
+        chef = Chef.query.filter_by(user_id=current_user.id).first()
+        if chef and (chef.latitude is None or chef.longitude is None):
+            # update the location in Chef Model
+            chef.latitude = latitude
+            chef.longitude = longitude
+            db.session.commit()
+        else:
+             # Chef already has a location, no need to update
+             return jsonify({"message": 'Location already set'}), 200
+        # optionally, update the user model to 
+    return jsonify({'message': 'Location updated successfully'})
 
 
 # Route to handle password reset request

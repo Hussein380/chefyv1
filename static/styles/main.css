@@ -4,6 +4,20 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+/* Styles for the location prompt */
+#location-prompt {
+    color: orange;           /* Text color */
+    background-color: #fff3cd; /* Light background to make the prompt more noticeable */
+    border: 1px solid orange; /* Optional border */
+    padding: 10px;            /* Some padding for better spacing */
+    margin-bottom: 15px;      /* Space between the prompt and the form */
+    display: none;            /* Initially hidden */
+    border-radius: 5px;       /* Rounded corners */
+    font-weight: bold;        /* Make text bold */
+    text-align: center;       /* Center the text */
+}
+
+
 
 body {
     background-color: #222;

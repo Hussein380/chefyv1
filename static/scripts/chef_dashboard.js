@@ -21,19 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to handle profile retrieval
     function getProfile() {
         fetch('/api/chef/profile')
-        .then(response => response.json())
-        .then(data => {
-            if (data.username) {
-                document.getElementById('username').value = data.username;
-                document.getElementById('bio').value = data.bio;
-                document.getElementById('whatsapp').value = data.whatsapp;
-                document.getElementById('profileImagePreview').src = data.profile_picture ? `/uploads/${data.profile_picture}` : '/static/images/default_profile.jpg';
-                locationToggle.checked = data.location_enabled;
-            } else {
-                // Redirect to the dashboard to create a profile
-                alert('Profile not found. Please create a profile');
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('username').value = data.username;
+                    document.getElementById('bio').value = data.bio;
+                    document.getElementById('cuisineTypes').value = data.cuisine_types; // Add this line
+                    document.getElementById('whatsapp').value = data.whatsapp;
+                    document.getElementById('profileImagePreview').src = data.profile_picture ? data.profile_picture : '/static/assets/default_profile.png';
+                    locationToggle.checked = data.location_enabled;
+                } else {
+                    alert('Profile not found. Please create a profile');
+                }
+            });
     }
 
     // Function to create profile
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('username', profileData.username);
         formData.append('bio', profileData.bio);
+        formData.append('cuisine_types', profileData.cuisine_types); // Add this line
         formData.append('whatsapp', profileData.whatsapp);
         formData.append('location_enabled', profileData.location_enabled);
         if (profilePicture) {
@@ -54,27 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            loadingIndicator.style.display = 'none'; // Hide loading spinner
-            if (data.success) {
-                alert('Profile created successfully!');
-                // Optionally redirect to profile page or dashboard
-            } else {
-                alert(data.error);
-            }
-        });
-    }
-
-    // Function to show toast messages
-    function showToast(message, type) {
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`; // 'toast' is a base class, type can be 'success' or 'error'
-        toast.innerText = message;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 3000); // Remove after 3 seconds
+            .then(response => response.json())
+            .then(data => {
+                loadingIndicator.style.display = 'none'; // Hide loading spinner
+                if (data.success) {
+                    alert('Profile created successfully!');
+                    getProfile(); // Refresh the profile data
+                } else {
+                    alert(data.error);
+                }
+            });
     }
 
     // Function to handle profile updates
@@ -82,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('username', profileData.username);
         formData.append('bio', profileData.bio);
+        formData.append('cuisine_types', profileData.cuisine_types); // Add this line
         formData.append('whatsapp', profileData.whatsapp);
         formData.append('location_enabled', profileData.location_enabled);
         if (profilePicture) {
@@ -95,15 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            loadingIndicator.style.display = 'none'; // Hide loading spinner
-            if (data.success) {
-                alert('Profile updated successfully!');
-            } else {
-                alert(data.error);
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                loadingIndicator.style.display = 'none'; // Hide loading spinner
+                if (data.success) {
+                    alert('Profile updated successfully!'); // Alert for successful update
+                    getProfile(); // Refresh the profile data
+                } else {
+                    alert(data.error);
+                }
+            });
     }
 
     // Function to handle profile deletion
@@ -111,15 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/api/chef/delete-profile', {
             method: 'DELETE'
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Profile deleted successfully!');
-                // Optionally redirect or clear form
-            } else {
-                alert(data.error);
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Profile deleted successfully!');
+                    window.location.href = '/register'; // Redirect to the registration page
+
+                } else {
+                    alert(data.error);
+                }
+            });
     }
 
     // Event listeners
@@ -128,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const profileData = {
             username: document.getElementById('username').value,
             bio: document.getElementById('bio').value,
+            cuisine_types: document.getElementById('cuisineTypes').value, // Add this line
             whatsapp: document.getElementById('whatsapp').value,
             location_enabled: locationToggle.checked
         };
@@ -135,14 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Decide whether to create or update profile
         fetch('/api/chef/profile')
-        .then(response => response.json())
-        .then(data => {
-            if (data.username) {
-                updateProfile(profileData, profilePicture);
-            } else {
-                createProfile(profileData, profilePicture);
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    updateProfile(profileData, profilePicture);
+                } else {
+                    createProfile(profileData, profilePicture);
+                }
+            });
     });
 
     deleteProfileButton.addEventListener('click', () => {
@@ -158,3 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     getProfile();
 });
 
+
+document.getElementById('toggleDishForm').addEventListener('click', function() {
+	var addDishForm = document.getElementById('addDishForm');
+	if (addDishForm.style.display === 'none') {
+		addDishForm.style.display = 'block';
+	} else {
+		addDishForm.style.display = 'none';
+	}
+});

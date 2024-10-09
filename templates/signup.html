@@ -9,8 +9,17 @@
 </head>
 
 <body>
+
     <div class="container">
         <h2>Sign Up</h2>
+	<!-- Add location prompt message -->
+	<div id="location-prompt">
+		<div id="location-prompt" style="display: none; color: #ff9900; font-weight: bold;">
+			    Allow location access to see nearby chefs and personalized recommendations based on your area. Your privacy is important, and we won’t share your location without your consent.
+		</div>
+
+	</div>
+
         <form id="signup-form", method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
@@ -29,8 +38,11 @@
 
             <button type="submit">Sign Up</button>
         </form>
+	<div class="signup-link">
+		<p>Account exist ? <a href="login.html">Sign in</a></p>
+	</div>
     </div>
-    <script src="{{ url_for('static', filename='scripts/signup.js') }}"></script>
+    <script type='module' src="{{ url_for('static', filename='scripts/signup.js') }}"></script>
 </body>
 
 </html>

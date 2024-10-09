@@ -1,14 +1,14 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models import db
-from sqlalchemy.orm import Session
 import jwt
 import re
+import datetime  # Make sure to import datetime
 
 # Create a blueprint for user-related routes
 user_bp = Blueprint('user', __name__)
-SECRET_KEYS = ''
+SECRET_KEY = 'your_secret_key_here'  # Ensure your secret key is defined
 
 # Helper function to validate email format
 def is_valid_email(email):
@@ -109,3 +109,7 @@ def delete_user_account(user_id):
     db.session.commit()
     return jsonify({"message": "User deleted successfully"}), 200
 
+# Route for serving the registration page
+@user_bp.route('/register', methods=['GET'])
+def register_page():
+    return send_from_directory('static', 'signuphtml')
