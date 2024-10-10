@@ -32,7 +32,7 @@ def chef_dashboard():
         return render_template('chef_dashboard.html', chef=chef)
 
     else:
-        return render_template('cooks.html')
+        return render_template('consumer_page.html')
 
 
 # Route for cooks page
@@ -40,7 +40,7 @@ def chef_dashboard():
 @login_required
 def cooks():
     if current_user.role == 'consumer':
-        return render_template('cooks.html')
+        return render_template('consumer_page.html')
     else:
         return render_template('chef_dashboard.html')
 

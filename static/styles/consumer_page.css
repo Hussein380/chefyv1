@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.profiles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.profile-card {
+    background-color: #333; /* Dark background for the card */
+    color: white; /* Text color changed to white for better contrast */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 250px; /* Adjust size as needed */
+}
+
+.profile-card img {
+    width: 70px; /* Small size for the profile picture */
+    height: 70px; /* Ensure the height is the same as width for round shape */
+    border-radius: 50%; /* Make the image round */
+}
+
+.profile-card h2 {
+    font-size: 1.5em;
+}
+
+.profile-card p {
+    font-size: 0.9em;
+    color: #ccc; /* Adjusted text color for better contrast */
+}
+
+button {
+    background-color: red; /* Change button background color to red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: darkred; /* Darker red on hover */
+}
+
+.chef-details {
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none; /* Hide the chef details initially */
+}
+

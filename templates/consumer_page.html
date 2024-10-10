@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Talented Cooks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/consumer_page.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Explore Talented Cooks</h1>
+    </header>
+    <main class="profiles-container" id="chefsContainer">
+        <!-- Chef cards will be dynamically inserted here by JavaScript -->
+    </main>
+    <script src="{{ url_for('static', filename='scripts/consumer_page.js') }}"></script>
+</body>
+</html>
+

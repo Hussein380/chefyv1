@@ -17,6 +17,19 @@ def uploaded_file(filename):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@chef_bp.route('/api/chefs', methods=['GET'])
+def get_chefs():
+    """ Retrieve all chef profiles. """
+    chefs = Chef.query.all()
+    chefs_list = [{
+        "image": f'/uploads/{chef.profile_picture}' if chef.profile_picture else '/static/assets/default_profile.png',
+        "name": chef.username,
+        "bio": chef.bio or 'No bio available',
+        "specialties": chef.cuisine_types.split(',') if chef.cuisine_types else [],
+        "whatsapp": chef.whatsapp
+    } for chef in chefs]
+    return jsonify(chefs_list)
+
 @chef_bp.route('/api/chef/create_profile', methods=['POST'])
 @login_required
 def create_profile():
