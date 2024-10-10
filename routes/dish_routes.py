@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 from app import db
 from models.dishes import Dishes  # Ensure you import the Dishes model correctly
+from models.chef import Chef
 import os
 
 dish_bp = Blueprint('dish_bp', __name__)
@@ -42,18 +43,22 @@ def add_dish():
             flash('Quantity is required.')
             return redirect(request.url)
 
-        # Instantiate the Dishes model
-        new_dish = Dishes(
-            dish_name=dish_name,
-            dish_image=filename,
-            price=dish_price,
-            quantity=dish_quantity,
-            chef_id=current_user.id,
-            likes=0  # Initialize likes to 0
+        chef = Chef.query.filter_by(user_id=current_user.id).first()
+        if chef:
+            # Instantiate the Dishes model
+            new_dish = Dishes(
+                    dish_name=dish_name,
+                    dish_image=filename,
+                    price=dish_price,
+                    quantity=dish_quantity,
+                    chef_id=chef.chef_id,
+                    likes=0  # Initialize likes to 0
         )
+            db.session.add(new_dish)
+            db.session.commit()
+        else:
+            flash("chef profile not found")
 
-        db.session.add(new_dish)
-        db.session.commit()
 
         flash('Dish added successfully!')
         return redirect(url_for('dish_bp.view_dishes'))
