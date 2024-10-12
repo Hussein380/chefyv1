@@ -75,9 +75,11 @@ def find_nearby_chefs():
             if distance_to_chef <= search_radius:
                 nearby_chefs.append({
                     'chef_id': chef.chef_id,
-                    'username': chef.username,
+                    'name': chef.username,
                     'bio': chef.bio or 'No bio available',
-                    'profile_image': chef.profile_picture or 'static/assets/default_profile.png',
+                    "image": f'/uploads/{chef.profile_picture}' if chef.profile_picture else '/static/assets/default_profile.png',
+                    # 'image': chef.profile_picture or 'static/assets/default_profile.png',
+                    # 'image': chef.profile_picture or 'static/assets/default_profile.png',
                     'specialties': chef.cuisine_types.split(',') if chef.cuisine_types else [],  # Split specialties
                     'whatsapp': chef.whatsapp or 'Not provided',
                     'distance_km': round(distance_to_chef, 2)  # Rounded distance for better presentation

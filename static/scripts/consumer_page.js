@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Set the inner HTML for the chef card
                 chefCard.innerHTML = `
-		    <img src="${chef.profile_image }" alt="${chef.name}">
-                    <h2>${chef.username}</h2>
+		    <img src="${chef.image }" alt="${chef.name}">
+                    <h2>${chef.name}</h2>
                     <p>${chef.bio || 'No bio available'}</p>
                     <button class="see-more-btn">See More</button>
                     <button class="explore-food-btn">Explore Food</button>
