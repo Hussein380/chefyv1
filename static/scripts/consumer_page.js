@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add event listener for "Explore Food" button
                 const exploreFoodBtn = chefCard.querySelector('.explore-food-btn');
                 exploreFoodBtn.addEventListener('click', () => {
-                    window.location.href = `/view_dishes.html?chef_id=${chef.chef_id}`;  // Pass chef_id to view_dishes.html
+                    window.location.href = `/api/dishes?chef_id=${chef.chef_id}`;;  // Pass chef_id to view_dishes.html
                 });
 
                 // Append the chef card to the container

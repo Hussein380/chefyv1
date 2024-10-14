@@ -68,8 +68,13 @@ def add_dish():
 
 @dish_bp.route('/api/dishes', methods=['GET'])
 def view_dishes():
-    # Logic to view dishes
-    dishes = Dishes.query.all()  # Example query
+    print("View dishes route accessed")
+    chef_id =  request.args.get('chef_id')
+    if chef_id:
+        # fetch dishes specific to that chef
+        dishes = Dishes.query.filter_by(chef_id=chef_id).all()
+    else:
+        dishes = Dishes.query.all()
     return render_template('view_dishes.html', dishes=dishes)
 
 @dish_bp.route('/api/dish/<int:dish_id>/like', methods=['POST'])
