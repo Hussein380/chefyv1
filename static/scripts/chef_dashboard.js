@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.success) {
                     alert('Profile deleted successfully!');
-                    window.location.href = '/register'; // Redirect to the registration page
+		    document.getElementById('profileForm').reset();
 
                 } else {
                     alert(data.error);

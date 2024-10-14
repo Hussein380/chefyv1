@@ -131,7 +131,6 @@ def delete_profile():
 
     # Send response with redirect URL to the frontend
     return jsonify({
-        "success": "Profile deleted successfully",
-        "redirect_url": "/signup"  # Send the redirect URL to the frontend
+        "success": "Profile deleted successfully", 
     })
 
