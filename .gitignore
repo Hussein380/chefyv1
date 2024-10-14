@@ -19,3 +19,7 @@ migrations/versions/
 .idea/
 .vscode/
 secret_key.txt
+
+*.pyc
+__pycache__/
+
