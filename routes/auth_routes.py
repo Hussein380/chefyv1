@@ -13,6 +13,13 @@ auth_bp = Blueprint('auth', __name__)
 # Serializer to generate and decode tokens for secure password reset links
 
 
+@auth_bp.route('/check_login_status', methods=['GET'])
+def check_login_status():
+    """check if user is logged in """
+    if 'id' in session:
+        return jsonify({'is_logged_in': True, "role": session.get('role')})
+    return jsonify({'is_logged_in': False}), 200
+
 # Route to render the signup page
 @auth_bp.route('/signup', methods=['GET'])
 def signup_page():
@@ -88,7 +95,10 @@ def login():
         login_user(user)
 
         collect_location = False
-
+        
+        # store user role in session
+        session['role'] = user.role
+        session['id'] = user.id
         if user.role == 'chef':
             chef = Chef.query.filter_by(user_id=user.id).first()
             if chef and (chef.latitude is None or chef.longitude is None):

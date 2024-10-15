@@ -14,6 +14,9 @@ def home():
 def contact_us():
     return render_template('contact-us.html')
 
+@page_bp.route('/consumer')
+def consumer_page():
+    return render_template('consumer_page.html')
 
 @page_bp.route('/login.html')
 def login():
