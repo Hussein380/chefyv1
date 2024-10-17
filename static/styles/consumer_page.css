@@ -77,8 +77,8 @@ button {
     margin: 5px 0;
 }
 
-button:hover {
-    background-color: darkred; /* Darker red on hover */
+see-more-btn button:hover {
+    background-color: green; /* Darker red on hover */
 }
 
 .chef-details {
@@ -87,5 +87,8 @@ button:hover {
 
 .hidden {
     display: none; /* Hide the chef details initially */
+}
+.see-more-btn {
+    background-color: green;	
 }
 

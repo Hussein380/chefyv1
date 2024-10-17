@@ -35,10 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
 
                 // Add event listener for "See More" button
-                const seeMoreBtn = chefCard.querySelector('.see-more-btn');
+		const seeMoreBtn = chefCard.querySelector('.see-more-btn');
                 const chefDetails = chefCard.querySelector('.chef-details');
+
                 seeMoreBtn.addEventListener('click', () => {
                     chefDetails.classList.toggle('hidden');  // Toggle visibility
+
+                    // Check if the details are visible or hidden
+                    if (chefDetails.classList.contains('hidden')) {
+                        seeMoreBtn.textContent = 'See More'; // Change text to 'See More'
+                    } else {
+                        seeMoreBtn.textContent = 'Show Less'; // Change text to 'Show Less'
+                    }
                 });
 
                 // Add event listener for "Explore Food" button
