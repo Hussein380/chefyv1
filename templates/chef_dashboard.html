@@ -31,11 +31,11 @@
                 </div>
                 <div class="form-group">
                     <label for="username">Chef Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Chef Username" value" ">
+                    <input type="text" id="username" name="username" placeholder="Chef Username" value="">
                 </div>
                 <div class="form-group">
                     <label for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" placeholder="Tell us about yourself..."> </textarea>
+                    <textarea id="bio" name="bio" placeholder="Tell us about yourself..."></textarea>
                 </div>
                 <div class="form-group">
                     <label for="cuisineTypes">Specialties/Cuisine Types:</label>
@@ -98,6 +98,9 @@
                 <hr>
                 {% endfor %}
             </div>
+
+            <!-- View and Manage Your Dishes Button -->
+            <a href="{{ url_for('dish_bp.list_dishes') }}" class="btn-view-dishes">View and Manage Your Dishes</a>
         </section>
     </div>
     <div id="loadingIndicator" style="display: none;">Loading...</div>
