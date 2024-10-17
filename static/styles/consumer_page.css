@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    background-color: black;  /* #f8f8f8 */
     margin: 0;
     padding: 0;
 }
@@ -19,21 +19,42 @@ header {
     padding: 20px;
 }
 
+/*
 .profile-card {
-    background-color: #333; /* Dark background for the card */
-    color: white; /* Text color changed to white for better contrast */
+    background-color: #333;  Dark background for the card 
+    color: white;  Text color changed to white for better contrast 
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 15px;
     padding: 20px;
     text-align: center;
-    width: 250px; /* Adjust size as needed */
+    width: 250px;  Adjust size as needed 
+}
+*/
+
+.profile-card {
+    width: 300px;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    max-height: 400px;
+    transition: max-height 0.3s ease;
+    overflow: hidden; /* Hide overflow by default */
+    max-height: 650px; /* Set a max height to limit card size */
+    transition: max-height 0.3s ease; /* Smooth transition for max-height change */
 }
 
+
+
 .profile-card img {
-    width: 70px; /* Small size for the profile picture */
-    height: 70px; /* Ensure the height is the same as width for round shape */
+    width: 15em; /* Small size for the profile picture */
+    height: 15em; /* Ensure the height is the same as width for round shape */
     border-radius: 50%; /* Make the image round */
 }
 
