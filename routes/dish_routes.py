@@ -94,3 +94,15 @@ def delete_dish(dish_id):
     flash('Dish deleted successfully!')
     return redirect(url_for('dish_bp.list_dishes'))
 
+@dish_bp.route('/api/dish/like/<int:dish_id>', methods=['POST'])
+@login_required
+def like_dish(dish_id):
+    # fetch dish by id
+    dish = Dishes.query.get_or_404(dish_id)
+
+    # increment the like count
+    dish.likes += 1
+    db.session.commit()
+
+    # return a success response
+    return jsonify({'success': True, 'message': 'Dish liked successfully!', 'likes': dish.likes})
