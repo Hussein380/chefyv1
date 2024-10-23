@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Set the inner HTML for the chef card
                 chefCard.innerHTML = `
-		    <img src="${chef.image }" alt="${chef.name}">
+                    <img src="${chef.image}" alt="${chef.name}" onclick="enlargeProfilePic('${chef.image}')">
                     <h2>${chef.name}</h2>
                     <p>${chef.bio || 'No bio available'}</p>
                     <button class="see-more-btn">See More</button>
@@ -30,12 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chef-details hidden">
                         <p><strong>Distance:</strong> ${chef.distance_km} km</p>
                         <p><strong>Cuisine:</strong> ${chef.specialties?.join(', ') || 'Not provided'}</p>
-                        <p><strong>WhatsApp:</strong> ${chef.whatsapp || 'Not provided'}</p>
+                        <p><strong>WhatsApp:</strong> 
+			            <a href="https://wa.me/${chef.whatsapp}" target="_blank" style="color: #25D366; text-decoration: none;">
+				                    <i class="fab fa-whatsapp"></i> ${chef.whatsapp || 'Not provided'}
+						                </a>
+								        </p>
                     </div>
                 `;
 
                 // Add event listener for "See More" button
-		const seeMoreBtn = chefCard.querySelector('.see-more-btn');
+                const seeMoreBtn = chefCard.querySelector('.see-more-btn');
                 const chefDetails = chefCard.querySelector('.chef-details');
 
                 seeMoreBtn.addEventListener('click', () => {
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add event listener for "Explore Food" button
                 const exploreFoodBtn = chefCard.querySelector('.explore-food-btn');
                 exploreFoodBtn.addEventListener('click', () => {
-                    window.location.href = `/api/dishes?chef_id=${chef.chef_id}`;;  // Pass chef_id to view_dishes.html
+                    window.location.href = `/api/dishes?chef_id=${chef.chef_id}`;  // Pass chef_id to view_dishes.html
                 });
 
                 // Append the chef card to the container
@@ -65,4 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
             chefsContainer.innerHTML = 'Failed to load chefs. Please try again later.';
         });
 });
+
+// Function to enlarge profile picture on click
+function enlargeProfilePic(imageSrc) {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.innerHTML = `<img src="${imageSrc}" alt="Profile Picture" class="enlarged-image">`;
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        document.body.removeChild(overlay); // Remove overlay when clicked
+    });
+}
 
