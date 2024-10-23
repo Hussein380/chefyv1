@@ -9,19 +9,19 @@
 </head>
 <body>
     <h1>List of Dishes</h1>
-    <ul>
+    <div class="dish-container">
         {% for dish in dishes %}
-        <li id="dish-{{ dish.dish_id }}">
+        <div class="dish-card" id="dish-{{ dish.dish_id }}">
             <h2>{{ dish.dish_name }}</h2>
             <p>{{ dish.description }}</p>
-            <p>Price: kes{{ dish.price }}</p>
+            <p>Price: KES {{ dish.price }}</p>
             <img src="{{ url_for('static', filename='uploads/' + dish.dish_image) }}" alt="{{ dish.dish_name }}">
             <p>Likes: <span id="likes-count-{{ dish.dish_id }}">{{ dish.likes }}</span></p>
-            <!-- Like button remains in the template -->
-            <button onclick="likeDish({{ dish.dish_id }})">❤️Like</button>
-        </li>
+            <!-- Like button -->
+            <button onclick="likeDish({{ dish.dish_id }})">❤️ Like</button>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 
     <!-- Link to external JavaScript file in the 'scripts' folder -->
     <script src="{{ url_for('static', filename='scripts/view_dishes.js') }}"></script>

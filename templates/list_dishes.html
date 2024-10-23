@@ -8,22 +8,22 @@
 </head>
 <body>
     <h1>List of Dishes</h1>
-    <ul>
+    <div class="dish-container">
         {% for dish in dishes %}
-        <li id="dish-{{ dish.dish_id }}">
+        <div class="dish-card" id="dish-{{ dish.dish_id }}">
             <h2>{{ dish.dish_name }}</h2>
             <p>{{ dish.description }}</p>
             <p>Price: KES {{ dish.price }}</p>
             <img src="{{ url_for('static', filename='uploads/' + dish.dish_image) }}" alt="{{ dish.dish_name }}">
             <p>Likes: <span id="likes-count-{{ dish.dish_id }}">{{ dish.likes }}</span></p>
-            
+
             <!-- Delete button form -->
             <form method="POST" action="{{ url_for('dish_bp.delete_dish', dish_id=dish.dish_id) }}">
                 <button type="submit">Delete</button>
             </form>
-        </li>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 
     <script src="{{ url_for('static', filename='scripts/list_dishes.js') }}"></script>
 </body>

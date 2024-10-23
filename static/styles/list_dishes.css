@@ -2,26 +2,41 @@ body {
     font-family: Arial, sans-serif;
     background-color: black; /* Set background to black */
     color: white; /* Set default text color to white for better contrast */
+    margin: 0;
+    padding: 20px; /* Add padding to body */
 }
 
-h1, h3, h4 {
+h1 {
     text-align: center;
     margin-bottom: 20px;
     color: yellow; /* Set heading color to bright yellow */
 }
 
+.dish-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping of cards */
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Space between cards */
+}
+
 .dish-card {
     border: 1px solid #ddd;
     padding: 15px;
-    margin-bottom: 20px;
-    text-align: center;
     border-radius: 8px;
-    background-color: #333; /* Optional: Add a darker background to dish cards */
+    background-color: #333; /* Darker background for dish cards */
     color: white; /* Set dish card text color to white */
+    width: 200px; /* Fixed width for cards */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    transition: transform 0.2s; /* Transition for hover effect */
+}
+
+.dish-card:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
 }
 
 .dish-card img {
-    max-width: 200px;
+    max-width: 100%; /* Make the image responsive */
     border-radius: 8px;
     margin: 10px 0;
 }
@@ -33,6 +48,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s; /* Transition for button hover */
 }
 
 button:hover {

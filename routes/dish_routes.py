@@ -48,7 +48,7 @@ def add_dish():
                 dish_image=filename,
                 price=dish_price,
                 quantity=dish_quantity,
-                chef_id=chef.chef_id,
+                chef_id=current_user.id,
                 likes=0  # Initialize likes to 0
             )
             db.session.add(new_dish)
@@ -64,7 +64,14 @@ def add_dish():
 
 @dish_bp.route('/api/dishes', methods=['GET'])
 def view_dishes():
-    dishes = Dishes.query.all()
+    # Get chef_id from query parameters
+    chef_id = request.args.get('chef_id', type=int)
+    if chef_id:
+        # filter dishes by the provided chef_id
+
+        dishes = Dishes.query.filter_by(chef_id=chef_id)
+    else:
+        return
     return render_template('view_dishes.html', dishes=dishes)
 
 @dish_bp.route('/api/list_dishes', methods=['GET'])
