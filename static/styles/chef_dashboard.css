@@ -186,6 +186,10 @@ button {
     margin-bottom: 10px;
 }
 
+.btn-add{
+    color: black;
+}
+
 .btn-add-dish {
     background-color: #2ecc71;
     color: #fff;
